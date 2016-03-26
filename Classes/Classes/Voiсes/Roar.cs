@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Classes.Voiсes
 {
+	/// <summary>
+	/// рычание
+	/// </summary>
 	public class Roar : IVoice
 	{
 		string voice = "Я рычу";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace Classes
 {
 	class Program
 	{
+		Logger logger = LogManager.GetCurrentClassLogger();
+
 		static void Main(string[] args)
 		{
 			Program p = new Program();
@@ -18,7 +21,9 @@ namespace Classes
 
 
 
-
+		/// <summary>
+		/// осуществляет работу программы
+		/// </summary>
 		public bool Menu1(List<Animal> zoo)
 		{
 			PrintMenu();
@@ -41,6 +46,9 @@ namespace Classes
 			return true;
 		}
 
+		/// <summary>
+		/// печатает одно из меню программы
+		/// </summary>
 		public void PrintMenu()
 		{
 			Console.WriteLine("Выберете желаемое действие:");
@@ -51,6 +59,10 @@ namespace Classes
 			Console.WriteLine("Esc для выхода");
 		}
 
+		/// <summary>
+		/// осуществляет переходы между различными меню программы
+		/// </summary>
+		/// <param name="ch">нажатая клавиша</param>
 		public void Switcher(ConsoleKey ch, List<Animal> zoo)
 		{
 			switch (ch)
@@ -67,8 +79,9 @@ namespace Classes
 		}
 
 
-
-
+		/// <summary>
+		/// печатает зоопарк
+		/// </summary>
 		public void WriteZoo(List<Animal> zoo)
 		{
 			if(zoo.Count == 0)
@@ -77,7 +90,10 @@ namespace Classes
 				foreach (Animal a in zoo)
 					Console.WriteLine("{0}, {1}, {2}", a.Name, a.MoveType.Move(), a.VoiseType.Voice());
 		}
-
+		
+		/// <summary>
+		/// осуществляет добавление нового животного
+		/// </summary>
 		public void AddAnimal(List<Animal> zoo)
 		{
 			IMove moveType;
@@ -100,6 +116,9 @@ namespace Classes
 			while (more);
 		}
 
+		/// <summary>
+		/// осуществляет меню многоразового ввода
+		/// </summary>
 		public bool More()
 		{
 			Console.WriteLine("Хотите добваить ещё?");
@@ -120,7 +139,9 @@ namespace Classes
 			while (true);
 		}
 
-
+		/// <summary>
+		/// узнаёт способ издавать звуки для нового животного
+		/// </summary>
 		public bool SubMenu1(out IVoice voiceType)
 		{
 			PrintSubMenu1();
@@ -146,6 +167,9 @@ namespace Classes
 			return false;
 		}
 
+		/// <summary>
+		/// печатает одно из меню программы
+		/// </summary>
 		public void PrintSubMenu1()
 		{
 			Console.WriteLine("Выберете способ издавать звуки для нового животного:");
@@ -158,6 +182,10 @@ namespace Classes
 			Console.WriteLine("6.Ничего");
 		}
 
+		/// <summary>
+		/// осуществляет выбор способа издавать звуки для нового 
+		/// животного в зависимости от выбора пользователя
+		/// </summary>
 		public IVoice SwitcherSub1(ConsoleKey ch)
 		{
 			switch (ch)
@@ -185,9 +213,9 @@ namespace Classes
 			}
 		}
 
-
-
-
+		/// <summary>
+		/// узнаёт способ передвигаться для нового животного
+		/// </summary>
 		public bool SubMenu2(out IMove moveType)
 		{
 			PrintSubMenu2();
@@ -213,6 +241,9 @@ namespace Classes
 			return false;
 		}
 
+		/// <summary>
+		/// печатает одно из меню программы
+		/// </summary>
 		public void PrintSubMenu2()
 		{
 			Console.WriteLine("Выберете способ передвижения нового животного:");
@@ -225,6 +256,10 @@ namespace Classes
 			Console.WriteLine("6.Ничего");
 		}
 
+		/// <summary>
+		/// осуществляет выбор способа передвижения для нового 
+		/// животного в зависимости от выбора пользователя
+		/// </summary>
 		public IMove SwitcherSub2(ConsoleKey ch)
 		{
 			switch (ch)
@@ -252,9 +287,9 @@ namespace Classes
 			}
 		}
 
-
-
-
+		/// <summary>
+		/// создаёт животное по полученным из прошлых меню данным
+		/// </summary>
 		public bool SubMenu3(List<Animal> zoo, IMove moveType, IVoice voiseType, out bool more)
 		{
 			PrintSubMenu3();
@@ -276,15 +311,24 @@ namespace Classes
 					return true;
 				}
 				else if (exc.Message == "неверное передвижение")
+				{
 					Console.WriteLine("Это животное не может так двигаться");
+					logger.Error("неверное передвижение");
+				}
 				else if (exc.Message == "неверное звучание")
+				{
 					Console.WriteLine("Это животное не может издавать такие звуки");
+					logger.Error("неверное передвижение");
+				}
 				else throw exc;
 			}
 			more = false;
 			return false;
 		}
 
+		/// <summary>
+		/// печатает одно из меню программы
+		/// </summary>
 		public void PrintSubMenu3()
 		{
 			Console.WriteLine("Что это за животное?");
@@ -296,6 +340,9 @@ namespace Classes
 			Console.WriteLine("5.Змея");
 		}
 
+		/// <summary>
+		/// создаёт выбоанное животное с описанными ранее свойствами
+		/// </summary>
 		public void SwitcherSub3(ConsoleKey ch, List<Animal> zoo, IMove moveType, IVoice voiseType)
 		{
 			switch (ch)

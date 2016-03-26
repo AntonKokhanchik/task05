@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Classes.Moves
 {
+	/// <summary>
+	/// ползание
+	/// </summary>
 	public class Сrawl : IMove
 	{
 		string move = "Я ползаю";

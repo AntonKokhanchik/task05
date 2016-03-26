@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Classes.Moves
 {
+	/// <summary>
+	/// ходьба
+	/// </summary>
 	public class Walk : IMove
 	{
 		string move = "Я хожу";

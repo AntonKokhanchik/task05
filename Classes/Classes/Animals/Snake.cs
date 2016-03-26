@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Classes.Animals
 {
+	/// <summary>
+	/// змея
+	/// </summary>
 	public class Snake : Animal
 	{
 		public Snake(IMove move, IVoice voise)

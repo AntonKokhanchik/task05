@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Classes.Animals
-{
+{	
+	/// <summary>
+	/// медведь
+	/// </summary>
 	public class Bear : Animal
 	{
 		public Bear(IMove move, IVoice voise)

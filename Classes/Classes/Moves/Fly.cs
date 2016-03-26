@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Classes.Moves
 {
+	/// <summary>
+	/// полёт
+	/// </summary>
 	public class Fly :IMove
 	{
 		string move = "Я летаю";
